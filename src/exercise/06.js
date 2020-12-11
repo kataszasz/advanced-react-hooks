@@ -3,10 +3,13 @@
 
 import * as React from 'react'
 
+const formatQueryDebugValue = ({query, initialState}) => 
+    `the query is: ${query}, while the initial state is: ${initialState}`
+
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
-  React.useDebugValue(`\`${query}\` => ${state}`)
-  
+  React.useDebugValue({query, initialState}, formatQueryDebugValue)
+
   React.useEffect(() => {
     let mounted = true
     const mql = window.matchMedia(query)
